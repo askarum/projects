@@ -8,14 +8,14 @@ class LinearRegression:
         self.b = None
 
     def fit(self,X,y):
-        n_samples,n_features = X.shape
-        self.w = np.zeros((n_features,1))
+        m,n = X.shape
+        self.w = np.zeros((n,1))
         self.b = 0
 
         for _ in range(self.n_iter):
             y_predicted = self.predict(X)
-            dw = (1/n_samples) * np.dot(X.T,(y_predicted-y))
-            db = (1/n_samples) * np.sum(y_predicted-y)
+            dw = np.dot(X.T,(y_predicted-y))/m
+            db = np.sum(y_predicted-y)/m
             self.w -= self.lr * dw
             self.b -= self.lr * db
 
